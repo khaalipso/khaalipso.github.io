@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>khaalipso.cloud</title>
+  <meta name="description" content="khaalipso.cloud — projets de l'organisation khaalipso">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --fg: #e6edf3;
+      --muted: #8b949e;
+      --accent: #4493f8;
+      --card: #161b22;
+      --border: #30363d;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    h1 .dot { color: var(--accent); }
+    p.tagline {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    .repos {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .repos a {
+      display: block;
+      padding: 0.9rem 1.4rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--fg);
+      text-decoration: none;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+    .repos a:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .repos a .name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .repos a .desc {
+      margin-top: 0.25rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    footer {
+      position: absolute;
+      bottom: 1.5rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <h1>khaalipso<span class="dot">.</span>cloud</h1>
+  <p class="tagline">Projets de l'organisation khaalipso</p>
+  <nav class="repos">
+    <a href="https://github.com/khaalipso/vela">
+      <div class="name">vela</div>
+      <div class="desc">An editor built around tasks, for people who code with agents</div>
+    </a>
+    <a href="https://github.com/khaalipso/sillage">
+      <div class="name">sillage</div>
+      <div class="desc">An Arc-style browser built on top of the real Firefox</div>
+    </a>
+  </nav>
+  <footer>
+    <a href="https://github.com/khaalipso">github.com/khaalipso</a>
+  </footer>
+</body>
+</html>
