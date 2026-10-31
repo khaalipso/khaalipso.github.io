@@ -1,97 +1,377 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>khaalipso.cloud</title>
-  <meta name="description" content="khaalipso.cloud — projets de l'organisation khaalipso">
-  <style>
-    :root {
-      --bg: #0d1117;
-      --fg: #e6edf3;
-      --muted: #8b949e;
-      --accent: #4493f8;
-      --card: #161b22;
-      --border: #30363d;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-    h1 {
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-    h1 .dot { color: var(--accent); }
-    p.tagline {
-      margin-top: 0.75rem;
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
-    .repos {
-      margin-top: 2.5rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .repos a {
-      display: block;
-      padding: 0.9rem 1.4rem;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: var(--fg);
-      text-decoration: none;
-      transition: border-color 0.15s ease, transform 0.15s ease;
-    }
-    .repos a:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-    .repos a .name {
-      font-weight: 600;
-      font-size: 1rem;
-    }
-    .repos a .desc {
-      margin-top: 0.25rem;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-    footer {
-      position: absolute;
-      bottom: 1.5rem;
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--accent); }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Khaalipso — Vela and Sillage</title>
+  <meta name="description" content="Vela, the editor where you direct coding agents and stay the author, and Sillage, Firefox organized by workspace. Open source, MIT licensed.">
+  <meta name="color-scheme" content="dark light">
+  <meta property="og:title" content="Khaalipso">
+  <meta property="og:description" content="Tools built around the task, not the window.">
+  <meta property="og:url" content="https://khaalipso.cloud/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <link rel="alternate" hreflang="en" href="https://khaalipso.cloud/">
+  <link rel="alternate" hreflang="fr" href="https://khaalipso.cloud/fr/">
+  <link rel="alternate" hreflang="x-default" href="https://khaalipso.cloud/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <script src="assets/motion.js" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I use Vela today?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not yet. Vela is still under construction and has no release. The source code is on GitHub."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which coding agents does Vela work with?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Claude Code, Codex, opencode, Gemini CLI and Crush. Vela drives these existing tools and handles what surrounds them: worktrees, review, checks and commits."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can an agent change my code without me?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Agents work in their own worktree and propose hunks. You accept, reject or edit each one before it reaches yours."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens to my work if I stop using Vela?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nothing is lost. Spaces are git branches and standard git worktrees, so any git tool can still read them."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Sillage a Firefox fork?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Sillage installs an unmodified Mozilla release and injects its interface at startup. The engine, security updates, extensions and Firefox Sync stay those of Firefox."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which systems does Sillage run on?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Linux x86_64 and macOS."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Sillage send my data anywhere?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your workspaces and boards are stored in your Firefox profile. Sillage makes no network requests of its own beyond search suggestions from your default search engine (when enabled in Firefox), Firefox Sync when you are signed in, and, on macOS, a daily check for new Firefox releases."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I report a bug or suggest an idea?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Open an issue on khaalipso/vela or khaalipso/sillage. Contributions are welcome."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
-  <h1>khaalipso<span class="dot">.</span>cloud</h1>
-  <p class="tagline">Projets de l'organisation khaalipso</p>
-  <nav class="repos">
-    <a href="https://github.com/khaalipso/vela">
-      <div class="name">vela</div>
-      <div class="desc">An editor built around tasks, for people who code with agents</div>
+  <a class="skip" href="#projects">Skip to projects</a>
+
+  <header class="top">
+    <a class="brand" href="#" aria-label="Khaalipso, home">
+      <img src="assets/favicon.svg" alt="" width="24" height="24">
+      <span>khaalipso<span class="dim">.cloud</span></span>
     </a>
-    <a href="https://github.com/khaalipso/sillage">
-      <div class="name">sillage</div>
-      <div class="desc">An Arc-style browser built on top of the real Firefox</div>
-    </a>
-  </nav>
-  <footer>
-    <a href="https://github.com/khaalipso">github.com/khaalipso</a>
+    <nav aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#vela">Vela</a>
+      <a href="#sillage">Sillage</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <a class="lang" href="fr/" hreflang="fr" lang="fr" title="Lire en français">FR</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="sky" aria-hidden="true">
+        <span class="stars"></span>
+        <span class="stars far"></span>
+        <picture data-speed=".25">
+          <img src="assets/img/horizon.svg" alt="" width="1920" height="1080" fetchpriority="high" decoding="async">
+        </picture>
+        <span class="glow"></span>
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">Open-source tools</p>
+        <h1>Built around <em>the task</em>, not the window.</h1>
+        <p class="lead">Vela is the editor where you direct coding agents and stay the author. Sillage turns
+          Firefox into a browser organized by workspace. Two open-source projects under the MIT
+          license, built in the open.</p>
+        <div class="actions">
+          <a class="btn primary" href="#projects">See the projects</a>
+          <a class="btn" href="https://github.com/khaalipso">GitHub</a>
+        </div>
+      </div>
+      <span class="cue" aria-hidden="true"></span>
+    </section>
+
+    <section id="projects" class="projects" aria-label="Projects">
+      <article class="card vela-card">
+        <img src="assets/vela.svg" alt="" width="56" height="56">
+        <div>
+          <h2>Vela</h2>
+          <p>The editor where agents do the work and you make the calls.</p>
+          <p class="tags"><span>Rust</span><span>Tauri 2</span><span>Svelte 5</span><span class="status">In development</span></p>
+        </div>
+        <a class="more" href="#vela">Discover Vela <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="card sillage-card">
+        <img src="assets/sillage.svg" alt="" width="56" height="56">
+        <div>
+          <h2>Sillage</h2>
+          <p>Firefox, organized by workspace. Same engine, same extensions, no fork.</p>
+          <p class="tags"><span>Firefox</span><span>JavaScript</span><span>Linux · macOS</span><span class="status ok">Usable</span></p>
+        </div>
+        <a class="more" href="#sillage">Discover Sillage <span aria-hidden="true">→</span></a>
+      </article>
+    </section>
+
+    <section class="duo" aria-label="Now and next">
+      <article class="moment">
+        <figure class="shot">
+          <picture>
+            <img src="assets/img/orbits.svg" alt="Small bodies orbiting a bright core, each on its own path" width="1200" height="1200" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div>
+          <p class="eyebrow">Today</p>
+          <h2>Works with what you already use.</h2>
+          <p>Vela drives Claude Code, Codex, opencode, Gemini CLI and Crush, each in its own worktree. Sillage runs the official Firefox, with your extensions and Firefox Sync. Nothing to migrate, nothing locked in.</p>
+        </div>
+      </article>
+      <article class="moment">
+        <figure class="shot">
+          <picture>
+            <img src="assets/img/dawn.svg" alt="The Sun breaking over a planet's horizon, its rays fanning out" width="1200" height="1200" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div>
+          <p class="eyebrow">Tomorrow</p>
+          <h2>Agents write more. You decide more.</h2>
+          <p>As agents take on more of the code, what counts is judgment: what to build, what to keep, what ships. Vela is built for that part. Every change reviewed, every check run, every commit yours.</p>
+        </div>
+      </article>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="track"><span>Spaces</span><span class="outline">Agents</span><span>Up next</span><span class="outline">Review</span><span>Commits</span><span class="outline">Workspaces</span><span>Board</span><span class="outline">Glance</span><span>Sync</span></div>
+      <div class="track"><span>Spaces</span><span class="outline">Agents</span><span>Up next</span><span class="outline">Review</span><span>Commits</span><span class="outline">Workspaces</span><span>Board</span><span class="outline">Glance</span><span>Sync</span></div>
+    </div>
+
+    <section class="tagline" aria-label="Tagline">
+      <p><span style="--i:0">Open</span> <span style="--i:1">a</span> <span style="--i:2">task.</span><br>
+        <span style="--i:3">Its</span> <span style="--i:4">repos,</span> <span style="--i:5">its</span> <span style="--i:6">links,</span> <span style="--i:7">its</span> <span style="--i:8">agents</span> <span style="--i:9">come</span> <span style="--i:10">with</span> <span style="--i:11">it.</span><br>
+        <span style="--i:12">Switch</span> <span style="--i:13">tasks,</span> <span style="--i:14">not</span> <span style="--i:15">windows.</span></p>
+    </section>
+
+    <section id="vela" class="project vela">
+      <div class="stage">
+        <picture data-speed=".1" aria-hidden="true">
+          <img src="assets/img/vela-sky.svg" alt="" width="1600" height="900" loading="lazy" decoding="async">
+        </picture>
+        <div class="stage-copy">
+          <img src="assets/vela.svg" alt="" width="64" height="64">
+          <p class="eyebrow">Project · editor</p>
+          <h2>Vela</h2>
+        </div>
+        <p class="credit">Vela: Latin for “sails”, and a constellation of the southern sky.</p>
+      </div>
+
+      <p class="lead">Agents now write a growing share of the code. Vela is where you run them: one
+            <strong>space</strong> per task, with its repos, its links and its agents, each agent in
+            its own worktree. They propose, you decide, and nothing reaches your code without you.</p>
+
+      <ul class="features">
+        <li>
+          <h3>Agents propose, you decide</h3>
+          <p>Each agent works in its own worktree and proposes hunks. Accept, reject or edit each one:
+            you stay the author of every line that ships.</p>
+        </li>
+        <li>
+          <h3>Every agent, one cockpit</h3>
+          <p>Claude Code, Codex, opencode, Gemini CLI, Crush: bring the ones you use. Vela handles
+            everything around them: worktrees, review, checks, commits.</p>
+        </li>
+        <li>
+          <h3>“Up next”</h3>
+          <p>Vela always shows the single most useful action: answer an agent, review a proposal,
+            commit. <kbd>Enter</kbd> does it.</p>
+        </li>
+        <li>
+          <h3>Made for developers</h3>
+          <p>Keyboard first: every action has a key, <kbd>Ctrl</kbd> <kbd>K</kbd> reaches everything,
+            <kbd>Ctrl</kbd> <kbd>P</kbd> opens any file. Git runs as in your terminal, with your hooks and your config.</p>
+        </li>
+        <li>
+          <h3>Review that checks for you</h3>
+          <p>Staged files, diff and checks (hooks, lint, types, tests) in one view. Checks rerun on
+            their own when what you stage changes, and never twice on the same tree.</p>
+        </li>
+        <li>
+          <h3>Commits worth reading</h3>
+          <p>Vela proposes the commits: conventional type and scope from the diff, a split when one
+            diff is really three, the ticket in the footer.</p>
+        </li>
+      </ul>
+
+      <p class="links">
+        <a class="btn" href="https://github.com/khaalipso/vela">Source code</a>
+        <span class="note">In active development, no release yet. Follow along on GitHub.</span>
+      </p>
+    </section>
+
+    <section id="sillage" class="project sillage">
+      <div class="stage">
+        <picture data-speed=".1" aria-hidden="true">
+          <img src="assets/img/comet.svg" alt="" width="1600" height="1000" loading="lazy" decoding="async">
+        </picture>
+        <div class="stage-copy">
+          <img src="assets/sillage.svg" alt="" width="64" height="64">
+          <p class="eyebrow">Project · browser</p>
+          <h2>Sillage</h2>
+        </div>
+        <p class="credit">Sillage: French for “wake”, like the tail a comet leaves behind it.</p>
+      </div>
+
+      <p class="lead">Inspired by Arc, Sillage gives Firefox a vertical sidebar, workspaces, profiles and a
+            command palette. It is not a fork: it installs the official Mozilla release and adds its
+            interface at startup, so the engine, security updates, extensions and Firefox Sync stay
+            those of Firefox.</p>
+
+      <ul class="features">
+        <li>
+          <h3>Workspaces and profiles</h3>
+          <p>Each workspace has its own color, pinned tabs and profile (a Firefox container): two
+            Google accounts side by side, in a single window.</p>
+        </li>
+        <li>
+          <h3>Command palette</h3>
+          <p>URLs, search, open tabs, history and commands in one field, with the best match filled in
+            as you type. <kbd>Ctrl</kbd> <kbd>T</kbd>.</p>
+        </li>
+        <li>
+          <h3>Board</h3>
+          <p>Each workspace has an infinite canvas for notes, text, shapes and links. Notes expire and
+            remind you, and an empty workspace opens on its board, never on a blank page.</p>
+        </li>
+        <li>
+          <h3>Glance</h3>
+          <p>A link opens in a card over the page. Keep it as a tab, or close it and carry on.</p>
+        </li>
+        <li>
+          <h3>Synced and encrypted</h3>
+          <p>Workspaces, pinned items, boards and profiles follow you through Firefox Sync,
+            end-to-end encrypted.</p>
+        </li>
+        <li>
+          <h3>Light and quiet</h3>
+          <p>Tabs load when you open them, cookie banners are refused for you, and Sillage sends
+            nothing of its own apart from a daily check for new Firefox releases on macOS.</p>
+        </li>
+      </ul>
+
+      <div class="install">
+        <p class="eyebrow">Install (Linux x86_64 or macOS)</p>
+<pre><code>git clone https://github.com/khaalipso/sillage.git
+cd sillage
+make install
+make launch</code></pre>
+      </div>
+
+      <p class="links">
+        <a class="btn" href="https://github.com/khaalipso/sillage">Source code</a>
+        <span class="note">Not affiliated with Mozilla or The Browser Company.</span>
+      </p>
+    </section>
+
+    <section id="faq" class="faq">
+      <h2>Questions</h2>
+      <div>
+        <details>
+          <summary>Can I use Vela today?</summary>
+          <p>Not yet. Vela is still under construction and has no release. The source code is on
+            <a href="https://github.com/khaalipso/vela">GitHub</a>.</p>
+        </details>
+        <details>
+          <summary>Which coding agents does Vela work with?</summary>
+          <p>Claude Code, Codex, opencode, Gemini CLI and Crush. Vela drives these existing tools and
+            handles what surrounds them: worktrees, review, checks and commits.</p>
+        </details>
+        <details>
+          <summary>Can an agent change my code without me?</summary>
+          <p>No. Agents work in their own worktree and propose hunks. You accept, reject or edit each
+            one before it reaches yours.</p>
+        </details>
+        <details>
+          <summary>What happens to my work if I stop using Vela?</summary>
+          <p>Nothing is lost. Spaces are git branches and standard <code>git worktree</code>s, so any
+            git tool can still read them.</p>
+        </details>
+        <details>
+          <summary>Is Sillage a Firefox fork?</summary>
+          <p>No. Sillage installs an unmodified Mozilla release and injects its interface at startup.
+            The engine, security updates, extensions and Firefox Sync stay those of Firefox.</p>
+        </details>
+        <details>
+          <summary>Which systems does Sillage run on?</summary>
+          <p>Linux x86_64 and macOS.</p>
+        </details>
+        <details>
+          <summary>Does Sillage send my data anywhere?</summary>
+          <p>Your workspaces and boards are stored in your Firefox profile. Sillage makes no network
+            requests of its own beyond search suggestions from your default search engine (when
+            enabled in Firefox), Firefox Sync when you are signed in, and, on macOS, a daily check
+            for new Firefox releases.</p>
+        </details>
+        <details>
+          <summary>How do I report a bug or suggest an idea?</summary>
+          <p>Open an issue on <a href="https://github.com/khaalipso/vela">khaalipso/vela</a> or
+            <a href="https://github.com/khaalipso/sillage">khaalipso/sillage</a>. Contributions are
+            welcome.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Get involved</h2>
+      <p>Both projects are developed on GitHub. Open an issue, share an idea or send a pull request.</p>
+      <p class="actions">
+        <a class="btn" href="https://github.com/khaalipso">github.com/khaalipso</a>
+        <a class="btn" href="https://github.com/LouisSinan">github.com/LouisSinan</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="bottom">
+    <p>© 2026 Khaalipso · Projects under the MIT License · Handmade, no trackers.</p>
   </footer>
 </body>
 </html>
